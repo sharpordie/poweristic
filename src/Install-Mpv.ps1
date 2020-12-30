@@ -74,8 +74,8 @@ function Expand-All {
 $website = 'https://sourceforge.net/projects/mpv-player-windows/files/64bit/'
 $content = (New-Object System.Net.WebClient).DownloadString($website)
 $pattern = 'mpv-x86_64-([\d]{8})-git-([\a-z]{7})\.7z'
-$returns = [Regex]::Matches($content, $pattern)
-$address = [string]::Format('https://sourceforge.net/projects/mpv-player-windows/files/64bit/mpv-x86_64-{0}-git-{1}.7z', $returns.Groups[1].Value, $returns.Groups[2].Value)
+$results = [Regex]::Matches($content, $pattern)
+$address = [string]::Format('https://sourceforge.net/projects/mpv-player-windows/files/64bit/mpv-x86_64-{0}-git-{1}.7z', $results.Groups[1].Value, $results.Groups[2].Value)
 $archive = [System.IO.Path]::Combine($env:TEMP, [System.IO.Path]::GetFileName($address))
 (New-Object System.Net.WebClient).DownloadFile($address, $archive)
 
@@ -84,7 +84,7 @@ $destination = [System.IO.Path]::Combine($env:LOCALAPPDATA, 'Programs', 'Mpv')
 New-Item -ItemType Directory -Path $destination -Force | Out-Null
 Expand-All $archive $destination
 
-# Download and install the latest "youtube-dl" release.
+# Download the latest youtube-dl.exe release.
 (New-Object System.Net.WebClient).DownloadFile('https://youtube-dl.org/downloads/latest/youtube-dl.exe', "$destination\youtube-dl.exe")
 
 # Edit the mpv.conf file.
