@@ -91,11 +91,16 @@ Expand-All $archive $destination
 New-Item -Path "$destination\mpv\mpv.conf" -Force | Out-Null
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'profile=gpu-hq'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'hwdec=auto'
-Add-Content -Path "$destination\mpv\mpv.conf" -Value 'interpolation=yes'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'keep-open=yes'
-Add-Content -Path "$destination\mpv\mpv.conf" -Value 'tscale=oversample'
-Add-Content -Path "$destination\mpv\mpv.conf" -Value 'video-sync=display-resample'
-Add-Content -Path "$destination\mpv\mpv.conf" -Value 'ytdl-format="bestvideo[height<=?2160]+bestaudio/best"'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'ytdl-format="bestvideo[height<=?2160][vcodec!=vp9]+bestaudio/best"'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value '[protocol.http]'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'cscale=bilinear'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'dscale=bilinear'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'force-window=immediate'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value '[protocol.https]'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'profile=protocol.http'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value '[protocol.ytdl]'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'profile=protocol.http'
 
 # Add a new shortcut to the Start Menu directory.
 $shortcut = [System.IO.Path]::Combine($env:APPDATA, 'Microsoft\Windows\Start Menu\Programs\Mpv.lnk')
