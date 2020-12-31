@@ -1,5 +1,3 @@
-# #Requires -RunAsAdministrator
-
 # Download and install Notion silently.
 $website = 'https://desktop-release.notion-static.com/latest.yml'
 $content = (New-Object System.Net.WebClient).DownloadString($website)
