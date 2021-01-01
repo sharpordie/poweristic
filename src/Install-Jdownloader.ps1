@@ -1,7 +1,7 @@
 #Requires -RunAsAdministrator
 
 # Download and install JDownloader silently.
-$address = if ([System.Environment]::Is64BitOperatingSystem) { 'http://installer.jdownloader.org/ic/JD2SilentSetup_x64.exe' } else { 'http://installer.jdownloader.org/ic/JD2SilentSetup_x86.exe' }
+$address = 'http://installer.jdownloader.org/ic/JD2SilentSetup_x64.exe'
 $program = [System.IO.Path]::Combine($env:TEMP, [System.IO.Path]::GetFileName($address))
 (New-Object System.Net.WebClient).DownloadFile($address, $program)
 Start-Process -FilePath `"$program`" -ArgumentList '-q' -NoNewWindow -Wait
