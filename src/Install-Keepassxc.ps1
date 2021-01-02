@@ -7,3 +7,6 @@ $address = "https://github.com/keepassxreboot/keepassxc/releases/download/$versi
 $program = [System.IO.Path]::Combine($env:TEMP, [System.IO.Path]::GetFileName($address))
 (New-Object System.Net.WebClient).DownloadFile($address, $program)
 Start-Process -FilePath 'msiexec.exe' -ArgumentList "/i `"$program`" /qn" -NoNewWindow -Wait
+
+# Remove it from startup programs.
+Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'KeePassXC'
