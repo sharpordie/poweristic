@@ -50,6 +50,10 @@ function Disable-AutoPlay {
     Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoplayHandlers' -Name 'DisableAutoplay' -Type DWord -Value 1
 }
 
+function Disable-ClipboardHistory {
+    Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Clipboard' -Name 'EnableClipboardHistory' -ErrorAction SilentlyContinue
+}
+
 function Disable-OneDrive {
     if (!(Test-Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive')) {
         New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive' | Out-Null
@@ -105,6 +109,7 @@ Show-FileExtensions
 Show-SmallTaskbarIcons
 ###
 Disable-AutoPlay
+Disable-ClipboardHistory
 Disable-OneDrive
 Disable-WallpaperCompression
 ###
