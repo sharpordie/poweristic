@@ -94,6 +94,7 @@ function Set-KodiWebServerNoPassword {
     $document.SelectSingleNode('//*[@id="services.webserverauthentication"]').InnerText = 'false'
     $document.Save($settings)
 }
+
 function Set-KodiSources {
     # Make sure to create the media directories.
     $rootMediaDirectory = 'C:\MyMedia\'
