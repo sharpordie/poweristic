@@ -152,12 +152,12 @@ function Set-UltimatePowerPlan {
     Start-Process -FilePath 'powercfg.exe' -ArgumentList "-s $uuid" -NoNewWindow -Wait
 }
 
-# #Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 
-Rename-Computer -NewName 'HTPC'
+# Rename-Computer -NewName 'HTPC'
 Set-UltimatePowerPlan
 Set-DoNothingAsCloseLidAction
 Install-Kodi
 Add-KodiToWindowsStartup
 Set-KodiSettings
-Set-KodiSources
+# Set-KodiSources
