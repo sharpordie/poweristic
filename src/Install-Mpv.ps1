@@ -92,6 +92,7 @@ New-Item -Path "$destination\mpv\mpv.conf" -Force | Out-Null
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'profile=gpu-hq'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'hwdec=auto'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'keep-open=yes'
+Add-Content -Path "$destination\mpv\mpv.conf" -Value 'tls-verify=no'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'ytdl-format="bestvideo[height<=?2160][vcodec!=vp9]+bestaudio/best"'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value '[protocol.http]'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'cscale=bilinear'
@@ -103,5 +104,8 @@ Add-Content -Path "$destination\mpv\mpv.conf" -Value '[protocol.ytdl]'
 Add-Content -Path "$destination\mpv\mpv.conf" -Value 'profile=protocol.http'
 
 # Add a new shortcut to the Start Menu directory.
-$shortcut = [System.IO.Path]::Combine($env:APPDATA, 'Microsoft\Windows\Start Menu\Programs\Mpv.lnk')
+$shortcut = [System.IO.Path]::Combine($env:APPDATA, 'Microsoft\Windows\Start Menu\Programs\mpv.lnk')
 New-Shortcut -ShortcutFile $shortcut -TargetPath "$destination\mpv.exe"
+
+# Make it as default video application.
+Start-Process -FilePath "$destination\installer\mpv-install.bat" -ArgumentList '/u'

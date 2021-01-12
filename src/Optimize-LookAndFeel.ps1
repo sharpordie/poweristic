@@ -115,6 +115,8 @@ Disable-WallpaperCompression
 ###
 Clear-StartMenuTiles
 Clear-TaskbarIcons
+Restart-Explorer
 ###
 Limit-DefenderCpuUsage
-Restart-Explorer
+Rename-Computer -NewName 'ELITEDESK'
+Set-TimeZone -Name 'Romance Standard Time'
