@@ -71,7 +71,7 @@ function Disable-WallpaperCompression {
 ###
 
 function Clear-StartMenuTiles {
-    $key = Get-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\*start.tilegrid`$windows.data.curatedtilecollection.tilecollection\Current'
+    $key = Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\*start.tilegrid`$windows.data.curatedtilecollection.tilecollection\Current"
     $data = $key.Data[0..25] + ([byte[]](202, 50, 0, 226, 44, 1, 1, 0, 0))
     Set-ItemProperty -Path $key.PSPath -Name 'Data' -Type Binary -Value $data
     Stop-Process -Name 'ShellExperienceHost' -Force -ErrorAction SilentlyContinue
