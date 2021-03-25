@@ -1,9 +1,9 @@
 #Requires -RunAsAdministrator
 
 # Download and install Freezer silently.
-$website = 'https://freezer.life/'
+$website = 'https://aur.archlinux.org/packages/freezer-bin/'
 $content = (New-Object System.Net.WebClient).DownloadString($website)
-$pattern = 'Freezer PC ([\d.]+):'
+$pattern = 'freezer-bin ([\d.]+)'
 $version = [Regex]::Matches($content, $pattern).Groups[1].Value
 $address = "https://files.freezer.life/0:/PC/$version/Freezer Setup $version.exe"
 $program = [System.IO.Path]::Combine($env:TEMP, [System.IO.Path]::GetFileName($address))
