@@ -15,7 +15,21 @@ $extractDir = [System.IO.Directory]::CreateDirectory([System.IO.Path]::Combine([
 Expand-Archive -Path $archive -DestinationPath $extractDir
 $program = (Get-ChildItem -Path $extractDir | Select-Object -First 1).FullName
 Start-Process -FilePath `"$program`" -ArgumentList '/VERYSILENT /NORESTART /SUPPRESSMSGBOXES /SP- /COMPONENTS="main,mpciconlib,mpcberegvid,mpcberegpl"' -NoNewWindow -Wait
+Start-Sleep -Seconds 5
 Get-Process | Where-Object { $_.MainWindowTitle -eq "Settings" } | Stop-Process -Force
+
+# Download the latest youtube-dl release.
+$destination = "$env:ProgramFiles\MPC-BE x64"
+(New-Object System.Net.WebClient).DownloadFile('https://youtube-dl.org/downloads/latest/youtube-dl.exe', "$destination\youtube-dl.exe")
+
+# Edit the MPC-BE settings.
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YoutubePageParser' -Type DWord -Value 00000000
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLEnable' -Type DWord -Value 00000001
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaxHeight' -Type DWord -Value 00000438
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaximumQuality' -Type DWord -Value 00000001
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'SubpicMaxTexWidth' -Type DWord -Value 00000000
+# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 00000005 # MPCVR
+# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 00000007 # MADVR
 
 # Remove the shortcut from the desktop directory.
 $shortcut = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "MPC*.lnk")
