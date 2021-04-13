@@ -1,7 +1,7 @@
 #Requires -RunAsAdministrator
 
 # Download and install MPC-BE silently.
-$website = "https://www.videohelp.com/software/MPC-BE"
+$website = 'https://www.videohelp.com/software/MPC-BE'
 $content = (New-Object System.Net.WebClient).DownloadString($website)
 $pattern = "class=`"toollink`" href=`"(.*)`">Download MPC-BE [\d.]+ Nightly 64-bit"
 $website = [Regex]::Matches($content, $pattern).Groups[1].Value
@@ -23,13 +23,15 @@ $destination = "$env:ProgramFiles\MPC-BE x64"
 (New-Object System.Net.WebClient).DownloadFile('https://youtube-dl.org/downloads/latest/youtube-dl.exe', "$destination\youtube-dl.exe")
 
 # Edit the MPC-BE settings.
-Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YoutubePageParser' -Type DWord -Value 00000000
-Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLEnable' -Type DWord -Value 00000001
-Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaxHeight' -Type DWord -Value 00000438
-Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaximumQuality' -Type DWord -Value 00000001
-Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'SubpicMaxTexWidth' -Type DWord -Value 00000000
-# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 00000005 # MPCVR
-# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 00000007 # MADVR
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YoutubePageParser' -Type DWord -Value 0
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLEnable' -Type DWord -Value 1
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaxHeight' -Type DWord -Value 438 # 1080P
+# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaxHeight' -Type DWord -Value 870 # 2160P
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YDLMaximumQuality' -Type DWord -Value 1
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'SubpicMaxTexWidth' -Type DWord -Value 0
+Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 3 # EVRCP
+# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 5 # MPCVR
+# Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings\Video' -Name 'VideoRenderer' -Type DWord -Value 7 # MADVR
 
 # Remove the shortcut from the desktop directory.
 $shortcut = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "MPC*.lnk")
