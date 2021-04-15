@@ -19,8 +19,14 @@ Start-Sleep -Seconds 5
 Get-Process | Where-Object { $_.MainWindowTitle -eq "Settings" } | Stop-Process -Force
 
 # Download the latest youtube-dl release.
-$destination = "$env:ProgramFiles\MPC-BE x64"
+$destination = "$env:PROGRAMFILES\MPC-BE x64"
 (New-Object System.Net.WebClient).DownloadFile('https://youtube-dl.org/downloads/latest/youtube-dl.exe', "$destination\youtube-dl.exe")
+
+# Create default registry keys by starting MPC-BE once.
+Start-Process -FilePath "$env:PROGRAMFILES\MPC-BE x64\mpc-be64.exe" -WindowStyle Minimized
+Start-Sleep -Seconds 10
+Stop-Process -Name 'mpc-be64'
+Start-Sleep -Seconds 2
 
 # Edit the MPC-BE settings.
 Set-ItemProperty -Path 'HKCU:\Software\MPC-BE\Settings' -Name 'YoutubePageParser' -Type DWord -Value 0
