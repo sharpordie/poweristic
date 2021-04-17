@@ -29,3 +29,6 @@ try { $settingsJson.bannerenabled = $false } catch { $settingsJson | Add-Member 
 try { $settingsJson.myjdownloaderviewvisible = $false } catch { $settingsJson | Add-Member -Type NoteProperty -Name 'myjdownloaderviewvisible' -Value $false }
 try { $settingsJson.speedmetervisible = $false } catch { $settingsJson | Add-Member -Type NoteProperty -Name 'speedmetervisible' -Value $false }
 $settingsJson | ConvertTo-Json | Set-Content $settings
+
+# TODO: Make high DPI scaling performed by Application, fix the blurry text.
+$shortcut = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\JDownloader\JDownloader 2.lnk"
