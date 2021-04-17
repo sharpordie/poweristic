@@ -39,3 +39,6 @@ if (Test-Path -Path $shortcut) { Remove-Item -Path $shortcut }
 # Restart once again.
 Write-Host "Restarting the computer..."
 Restart-Computer
+
+# Remove it from startup.
+Remove-ItemProperty -Path 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' -Name 'Docker Desktop'
