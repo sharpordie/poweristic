@@ -12,5 +12,6 @@ Start-Process -FilePath `"$program`" -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXE
 
 # Edit the settings.
 $env:Path = [System.Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' + [System.Environment]::GetEnvironmentVariable('Path', 'User')
-git config --global credential.helper 'manager-core'
-git config --global init.defaultBranch 'main'
+git config --global credential.helper 'cache --timeout=43200'
+git config --global user.email 'sharpordie@outlook.com'
+git config --global user.name 'sharpordie'
