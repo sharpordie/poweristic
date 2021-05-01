@@ -21,6 +21,10 @@ $policies = @"
     "NoDefaultBookmarks":true,
     "NewTabPage":false,
     "ExtensionSettings":{
+      "ff2mpv@eastmarch.github.com":{
+        "installation_mode":"normal_installed",
+        "install_url":"https://addons.mozilla.org/firefox/downloads/latest/ff2mpv-for-windows/latest.xpi"
+      },
       "jid1-OY8Xu5BsKZQa6A@jetpack":{
         "installation_mode":"normal_installed",
         "install_url":"https://extensions.jdownloader.org/firefox.xpi"

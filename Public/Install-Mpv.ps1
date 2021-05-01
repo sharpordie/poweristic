@@ -70,6 +70,24 @@ function Expand-All {
     Start-Process -FilePath $program -ArgumentList $argList -NoNewWindow -Wait
 }
 
+function Install-YtdlProtocol {
+    param(
+        [Parameter(Mandatory)]
+        [string]
+        $MpvDirectory
+    )
+
+    (New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/eastmarch/ff2mpv/master/ytdlProtocol.bat', "$MpvDirectory\ytdlProtocol.bat")
+    (New-Object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/eastmarch/ff2mpv/master/ytdlRemove.bat', "$MpvDirectory\ytdlRemove.bat")
+    $psi = New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = "$MpvDirectory\ytdlProtocol.bat"
+    $psi.UseShellExecute = $false
+    $psi.RedirectStandardInput = $true
+    $p = [System.Diagnostics.Process]::Start($psi)
+    Start-Sleep -Seconds 2
+    $p.StandardInput.WriteLine("`n")
+}
+
 # Download the latest release.
 $website = 'https://sourceforge.net/projects/mpv-player-windows/files/64bit/'
 $content = (New-Object System.Net.WebClient).DownloadString($website)
@@ -86,6 +104,12 @@ Expand-All $archive $destination
 
 # Download the latest youtube-dl.exe release.
 (New-Object System.Net.WebClient).DownloadFile('https://youtube-dl.org/downloads/latest/youtube-dl.exe', "$destination\youtube-dl.exe")
+
+# Make sure Visual C++ 2010 Redistributable Package (x86) is installed.
+$address = 'https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe'
+$program = [System.IO.Path]::Combine($env:TEMP, [System.IO.Path]::GetFileName($address))
+(New-Object System.Net.WebClient).DownloadFile($address, $program)
+Start-Process -FilePath $program -ArgumentList '/fo /quiet /norestart' -NoNewWindow -Wait
 
 # Edit the mpv.conf file.
 New-Item -Path "$destination\mpv\mpv.conf" -Force | Out-Null
@@ -109,3 +133,6 @@ New-Shortcut -ShortcutFile $shortcut -TargetPath "$destination\mpv.exe"
 
 # Make it as default video application.
 Start-Process -FilePath "$destination\installer\mpv-install.bat" -ArgumentList '/u'
+
+# Setup the ytdl:// protocol for Firefox.
+Install-YtdlProtocol -MpvDirectory $destination
