@@ -17,6 +17,21 @@ Set-ItemProperty -Path 'HKLM:\Software\Wow6432Node\Microsoft\Edge\Extensions\odf
 New-Item -Path 'HKLM:\Software\Wow6432Node\Microsoft\Edge\Extensions\fjjfjlecfadomdpeohehfhnbekekdild'
 Set-ItemProperty -Path 'HKLM:\Software\Wow6432Node\Microsoft\Edge\Extensions\fjjfjlecfadomdpeohehfhnbekekdild' -Name 'update_url' -Value 'https://clients2.google.com/service/update2/crx'
 
+# Install the Blank New Tab Page extension from the Chrome Web Store.
+New-Item -Path 'HKLM:\Software\Wow6432Node\Microsoft\Edge\Extensions\jaadjnlkjnhohljficgoddcjmndjfdmi'
+Set-ItemProperty -Path 'HKLM:\Software\Wow6432Node\Microsoft\Edge\Extensions\jaadjnlkjnhohljficgoddcjmndjfdmi' -Name 'update_url' -Value 'https://clients2.google.com/service/update2/crx'
+
+# Run it once.
+Start-Process -FilePath "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe" -NoNewWindow
+Start-Sleep -Seconds 10
+Stop-Process -Name 'msedge'
+Start-Sleep -Seconds 2
+
+# Disable the first run page.
+New-Item -Path 'HKLM:\Software\Policies\Microsoft\MicrosoftEdge'
+New-Item -Path 'HKLM:\Software\Policies\Microsoft\MicrosoftEdge\Main'
+Set-ItemProperty -Path 'HKLM:\Software\Policies\Microsoft\MicrosoftEdge\Main' -Name 'PreventFirstRunPage' -Value '1'
+
 # Remove the shortcut from the desktop directory.
 $shortcut = [System.IO.Path]::Combine([Environment]::GetFolderPath("Desktop"), "*Edge*.lnk")
 if (Test-Path -Path $shortcut) { Remove-Item -Path $shortcut }
