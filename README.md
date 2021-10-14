@@ -1,9 +1,9 @@
 ***
 
 <div>
-  <img align="left" height="92" src="https://www.keonahealth.com/hs-fs/hubfs/HelathcareCRM.png?width=92&name=HelathcareCRM.png" alt="logo">
-  <h1>poweristic</h1>
-  <p>Lorem ipsum dolor sit amet.</p>
+    <img align="left" height="92" src="https://cdn-icons-png.flaticon.com/512/1599/1599768.png" alt="logo">
+    <h1>poweristic</h1>
+    <p>Small script collection for windows.</p>
 </div>
 
 ***
@@ -13,4 +13,12 @@
 Lorem ipsum dolor sit amet, adipiscing elit.  
 Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
 
-![screenshot](https://fakeimg.pl/640x360/?text=SCREENSHOT)
+## Usage
+
+```powershell
+# Clone the entire repository.
+Invoke-Expression -Command 'git clone https://notabug.org/foozoor/poweristic.git'
+
+# Invoke the desired script.
+Invoke-Expression -Command '.\src\New-DotnetProject.ps1 -Name MyLibrary -Type Lib -Test Nunit'
+```
