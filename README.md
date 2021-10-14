@@ -3,7 +3,7 @@
 <div>
     <img align="left" height="92" src="https://cdn-icons-png.flaticon.com/512/1599/1599768.png" alt="logo">
     <h1>poweristic</h1>
-    <p>Small script collection for windows.</p>
+    <p>Small script collection for Windows.</p>
 </div>
 
 ***
