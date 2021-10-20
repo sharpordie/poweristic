@@ -13,6 +13,8 @@
 Lorem ipsum dolor sit amet, adipiscing elit.  
 Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
 
+***
+
 ## Usage
 
 ### Clone and invoke the desired script
@@ -21,3 +23,9 @@ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
 Invoke-Expression -Command 'git clone https://notabug.org/foozoor/poweristic.git'
 Invoke-Expression -Command '.\src\New-DotnetProject.ps1 -Name MyLibrary -Type Lib -Test Nunit'
 ```
+
+***
+
+## Disclaimer
+
+Class aptent taciti sociosqu ad litora torquent per conubia.
