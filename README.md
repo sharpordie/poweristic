@@ -3,7 +3,7 @@
 <div>
     <img align="left" height="92" src="https://cdn-icons-png.flaticon.com/512/1599/1599768.png" alt="logo">
     <h1>poweristic</h1>
-    <p>Small script collection for Windows.</p>
+    <p>Small script collection for Windows</p>
 </div>
 
 ***
@@ -15,10 +15,9 @@ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
 
 ## Usage
 
-```powershell
-# Clone the entire repository.
-Invoke-Expression -Command 'git clone https://notabug.org/foozoor/poweristic.git'
+### Clone and invoke the desired script
 
-# Invoke the desired script.
+```powershell
+Invoke-Expression -Command 'git clone https://notabug.org/foozoor/poweristic.git'
 Invoke-Expression -Command '.\src\New-DotnetProject.ps1 -Name MyLibrary -Type Lib -Test Nunit'
 ```
