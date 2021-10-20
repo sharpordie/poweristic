@@ -53,8 +53,3 @@ Invoke-Expression -Command '.\src\New-DotnetProject.ps1 -Name MyLibrary -Type Li
 ```
 
 Check out [the unit tests](tests) for more usage examples.
-
-
-## Disclaimer
-
-Class aptent taciti sociosqu ad litora torquent per conubia.
